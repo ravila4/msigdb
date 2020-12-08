@@ -2,7 +2,7 @@ import glob
 import os
 
 from biothings.utils.dataload import tabfile_feeder
-from .geneset_utils import IDLookup
+from utils.geneset_utils import IDLookup
 
 
 def load_data(data_folder):
