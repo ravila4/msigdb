@@ -17,3 +17,65 @@ class msigdbUploader(uploader.BaseSourceUploader):
         self.logger.info("Load data from folder '%s'" % data_folder)
         msigdb_docs = load_data(data_folder)
         return msigdb_docs
+
+
+    @clasmethod
+    def get_mapping(cls):
+        mapping = {
+            "is_public": {
+                "type": "boolean"
+            },
+            "taxid": {
+                "type": "integer"
+            },
+            "genes": {
+                "properties": {
+                    "mygene_id": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword"
+                    },
+                    "symbol": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword"
+                    },
+                    "ncbigene": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword"
+                    },
+                    "ensemblgene": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword"
+                    },
+                    "uniprot": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword"
+                    },
+                    "name": {
+                        "type": "text"
+                    }
+                }
+            },
+            "msigdb": {
+                "properties": {
+                    "id": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword",
+                        "copy_to": [
+                            "all"
+                        ]
+                    },
+                    "geneset_name": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword",
+                        "copy_to": [
+                            "all"
+                        ]
+                    },
+                    "url": {
+                        "normalizer": "keyword_lowercase_normalizer",
+                        "type": "keyword"
+                    }
+                }
+            }
+        }
+        return mapping
